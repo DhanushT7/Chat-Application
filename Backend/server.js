@@ -6,6 +6,6 @@ app.get("/", (req, res)=>{
   res.send("server is ready");
 });
 
-app.listen(5002, ()=>{
-  console.log("server started: http://localhost:5002");
+app.listen(5001, ()=>{
+  console.log("server started: http://localhost:5001");
 });
