@@ -1,0 +1,181 @@
+body{
+  margin:0px;
+}
+
+.page-body{
+  height:100vh;
+  width:100%;
+  margin:0;
+  overflow:hidden;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-family:sans-serif;
+}
+
+.signup-box{
+  height:550px;
+  border-radius:26px;
+  background-color: rgb(255, 255, 255);
+  
+  border:1px solid rgb(255, 254, 254);
+  box-shadow: 0 0 10px grey;
+}
+
+.new-account{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin:10px;
+  padding:8px;
+  font-size:1.5rem;
+  font-weight:600;
+}
+
+.user-input-box{
+  height:200px;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.email-box{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding:10px;
+  margin-bottom:10px;
+}
+
+.email{
+  width:320px;
+  height:30px;
+  margin-top:8px;
+  padding:8px;
+  border-radius: 6px;
+  border-width:1px;
+  font-size:16px;
+  font-size:17px;
+  outline:none;
+  transition:all 0.2s ease-in-out;
+}
+
+.email:hover{
+    box-shadow:1px 1px 5px 2px rgb(215, 214, 214);
+}
+
+.email:focus{
+  outline:1px solid rgb(29, 197, 29);
+  box-shadow:none;
+}
+
+.password-box{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding:10px;
+  margin-bottom:10px;
+
+}
+
+.password{
+  width:320px;
+  height:30px;
+  margin-top:8px;
+  padding:8px;
+  border-radius: 6px;
+  border-width:1px;
+  font-size:16px;
+  outline:none;
+  transition:all 0.2s ease-in-out;
+}
+
+.password:hover{
+  box-shadow:1px 1px 5px 2px rgb(215, 214, 214);
+}
+
+.password:focus{
+  outline:1px solid rgb(245, 30, 30);
+  box-shadow:none;
+
+}
+
+.confirm-pass-box{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding:10px;
+  margin-bottom:10px;
+
+}
+
+.confirm-password{
+  width:320px;
+  margin-top:8px;
+  height:30px;
+  padding:8px;
+  border-radius: 6px;
+  border-width:1px;
+  font-size:16px;
+  outline:none;
+  transition:all 0.2s ease-in-out;
+}
+
+.confirm-password:hover{
+  box-shadow:1px 1px 5px 2px rgb(192, 190, 190);
+}
+
+.confirm-password:focus{
+  outline:1px solid rgb(245, 30, 30);
+  box-shadow:none;
+}
+
+.signup-btn{
+  background-color: black;
+  color:white;
+  padding:10px;
+  font-size:1.1rem;
+  border:none;
+  border-radius:8px;
+  transition:all 0.2s ease-in-out;
+
+}
+
+.signup-btn:hover{
+  color:black;
+  background-color: white;
+  font-weight:600;
+  box-shadow: 0 0 5px grey;
+
+}
+
+.signup-btn:active{
+  background-color:rgb(69, 68, 68);
+  color:white;
+}
+
+.Terms-box{
+  width:250px;
+} 
+
+.terms{
+  font-size:14px;
+  text-align: center;
+}
+
+.terms b{
+  color:rgb(0, 0, 0);
+}
+
+.terms b:hover{
+  text-decoration: underline;
+}
+
+.sign-in-option b{
+  color:rgb(15, 117, 15);
+}
+
+.sign-in-option b:hover{
+  text-decoration: underline;
+}
