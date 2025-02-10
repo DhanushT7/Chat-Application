@@ -3,7 +3,7 @@ import Mainpage from "./pages/main/website.jsx";
 import Home from './pages/home/Home.jsx'
 import Contact from './pages/contact/contact.jsx'
 import Login from './pages/login/login.jsx'
-import Forgot from './pages/forgotPass/forgotPass.jsx'
+import Forgot from './pages/forgotPass/enterOTP.jsx'
 import Signup from "./pages/signup/signup.jsx";
 
 

@@ -26,10 +26,12 @@ body{
 .otp-input input{
     height: 50px;
     width: 50px;
+    margin-top: 15px;
+    margin-right: 8px;
     text-align: center;
     font-size: 24px;
     border: 2px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .otp-input input:focus{
@@ -40,11 +42,12 @@ body{
 .verify-btn{
     width: 100%;
     padding: 10px;
+    margin-top: 25px;
     font-size: 18px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -57,11 +60,18 @@ p{
     font-size: 14px;
 }
 
-p a {
+.resend-link{
     color: #007bff;
     text-decoration: none;
+    cursor: pointer;
 }
 
-p a:hover{
+.resend-link:hover{
     text-decoration: underline;
+}
+
+.resend-link.disabled{
+    color: gray;
+    cursor: not-allowed;
+    pointer-events: none;
 }
