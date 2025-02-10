@@ -1,8 +1,8 @@
-function Home(){
+function forgotPass(){
   return(
     <>
       <h1>Home </h1>
     </>
   );
 }
-export default Home;
+export default forgotPass ;
