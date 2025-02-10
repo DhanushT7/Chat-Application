@@ -1,5 +1,80 @@
+import { useState, useEffect } from 'react';
 import './sign-up.css'
+
+
 function Signup(){
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [isSignupDisabled, setSignupDisabled] = useState(true);
+
+  function changePasswordColorGreen(color){
+    document.querySelector('.password')
+    .setAttribute("style", "color:green;outline:2px solid rgb(16, 201, 16)");
+
+    document.querySelector('.confirm-password')
+    .setAttribute("style", "color:green;outline:2px solid rgb(16, 201, 16)");
+  }
+
+  function changePasswordColorRed(color){
+    document.querySelector('.password')
+    .setAttribute("style", "color: rgb(245, 30, 30);outline:2px solid rgb(245, 30, 30)");
+
+    document.querySelector('.confirm-password')
+    .setAttribute("style", "color: rgb(245, 30, 30);outline:2px solid rgb(245, 30, 30)");
+  }
+  
+  function handleEmailChange(event){
+    setEmail(event.target.value);
+  }
+
+  function handlePasswordChange(event){
+    setPassword(event.target.value);
+  }
+
+  function handleconfirmPasswordChange(event){
+    setConfirmPassword(event.target.value);
+  }
+
+  useEffect(()=>{
+    let newErrors = {};
+    let noOfCorrectEntries = 0;
+
+    if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      newErrors.email = 'Invalid email or username!'
+    }
+
+    if(password && password.length < 6){
+      newErrors.password = 'must be atleast 6 characters!';
+    }
+
+    if(confirmPassword && confirmPassword !== password){
+      newErrors.confirmPassword = 'Password do not match!'
+      changePasswordColorRed();
+    }
+
+    if(password && confirmPassword && password === confirmPassword){
+      changePasswordColorGreen();
+    }
+
+    if(!(email && password && confirmPassword)){
+      newErrors.details = 'enter required details'
+    }
+
+    setErrors(newErrors);
+    setSignupDisabled(Object.keys(newErrors).length > 0);
+
+  }, [email, password, confirmPassword]);
+
+  function details(){
+    console.log(email);
+    console.log(password);
+    console.log(confirmPassword);
+    console.log(errors);
+  }
+
   return(
     <div className="page-body">
       
@@ -9,20 +84,23 @@ function Signup(){
         <div className="user-input-box">
           <div className="email-box">
             <label htmlFor="email">Email</label>
-            <input className="email" id="email" type="email" placeholder="email"></input>
+            <input value={email} className="email" id="email" type="email" placeholder="abc@gmail.com" onChange={handleEmailChange}></input>
+            {errors.email && <p className="email-error">{errors.email}</p>}
           </div>
 
           <div className="password-box">
             <label htmlFor="password">Password</label>
-            <input className="password" id="password" type="password" placeholder="password"></input>
+            <input value={password} className="password" id="password" type="password" placeholder="" onChange={handlePasswordChange}></input>
+            {errors.password && <p className="password-error">{errors.password}</p>}
           </div>
           
           <div className="confirm-pass-box">
             <label htmlFor="conf-pass">Confirm</label>
-            <input className="confirm-password" id="conf-pass" type="password" placeholder="password"></input>
+            <input value={confirmPassword} className="confirm-password" id="conf-pass" type="password" placeholder="" onChange={handleconfirmPasswordChange}></input>
+            {errors.confirmPassword && <p className="confirmPassword-error">{errors.confirmPassword}</p>}
           </div>
 
-          <button className="signup-btn">Sign Up</button>
+          <button disabled={isSignupDisabled} className="signup-btn" onClick={details}>Sign Up</button>
           <div className="Terms-box">
             <p className="terms">By Signing up, you agree to <b>Terms of Use</b> and <b>Privacy Policy</b></p>
           </div>
@@ -31,6 +109,7 @@ function Signup(){
             <p>Already have an account? <b>Sign in</b></p>
           </div>
         </div>
+
       </div>
     </div>
   );

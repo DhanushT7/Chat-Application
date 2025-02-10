@@ -11,15 +11,26 @@ body{
   align-items: center;
   justify-content: center;
   font-family:sans-serif;
+
+  background: linear-gradient(to right, rgb(4, 47, 68) 10%, black);
 }
 
 .signup-box{
-  height:550px;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
   border-radius:26px;
-  background-color: rgb(255, 255, 255);
-  
   border:1px solid rgb(255, 254, 254);
   box-shadow: 0 0 10px grey;
+  
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .new-account{
@@ -28,12 +39,16 @@ body{
   align-items: center;
   margin:10px;
   padding:8px;
-  font-size:1.5rem;
-  font-weight:600;
+  font-size:1.6rem;
+  font-weight:700;
+  color:black
 }
 
 .user-input-box{
-  height:200px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   display:flex;
   flex-direction:column;
   align-items: center;
@@ -48,6 +63,10 @@ body{
   margin-bottom:10px;
 }
 
+.email-box label{
+  color:white;
+}
+
 .email{
   width:320px;
   height:30px;
@@ -58,16 +77,21 @@ body{
   font-size:16px;
   font-size:17px;
   outline:none;
+  background-color:hsla(0, 0%, 100%, 0.644);
   transition:all 0.2s ease-in-out;
 }
 
 .email:hover{
-    box-shadow:1px 1px 5px 2px rgb(215, 214, 214);
+    box-shadow:1px 1px 5px 2px rgb(77, 78, 79);
 }
 
 .email:focus{
-  outline:1px solid rgb(29, 197, 29);
+  outline:2px solid rgb(16, 201, 16);
   box-shadow:none;
+}
+
+.email::placeholder{
+  color:rgb(69, 67, 67);
 }
 
 .password-box{
@@ -79,6 +103,10 @@ body{
 
 }
 
+.password-box label{
+  color:white;
+}
+
 .password{
   width:320px;
   height:30px;
@@ -86,28 +114,35 @@ body{
   padding:8px;
   border-radius: 6px;
   border-width:1px;
-  font-size:16px;
+  font-size:18px;
   outline:none;
+  background-color:hsla(0, 0%, 100%, 0.644);
   transition:all 0.2s ease-in-out;
 }
 
 .password:hover{
-  box-shadow:1px 1px 5px 2px rgb(215, 214, 214);
+  box-shadow:1px 1px 5px 2px rgb(77, 78, 79);
 }
 
 .password:focus{
-  outline:1px solid rgb(245, 30, 30);
+  outline:2px solid rgb(245, 30, 30);
   box-shadow:none;
+}
 
+.password::placeholder{
+  color:rgb(69, 67, 67);
 }
 
 .confirm-pass-box{
   display:flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
   padding:10px;
   margin-bottom:10px;
+}
 
+.confirm-pass-box label{
+  color:white;
 }
 
 .confirm-password{
@@ -117,18 +152,23 @@ body{
   padding:8px;
   border-radius: 6px;
   border-width:1px;
-  font-size:16px;
+  font-size:18px;
   outline:none;
+  background-color:hsla(0, 0%, 100%, 0.644);
   transition:all 0.2s ease-in-out;
 }
 
 .confirm-password:hover{
-  box-shadow:1px 1px 5px 2px rgb(192, 190, 190);
+  box-shadow:1px 1px 5px 2px rgb(77, 78, 79);
 }
 
 .confirm-password:focus{
-  outline:1px solid rgb(245, 30, 30);
+  outline:2px solid rgb(245, 30, 30);
   box-shadow:none;
+}
+
+.confirm-password::placeholder{
+  color:rgb(69, 67, 67);
 }
 
 .signup-btn{
@@ -173,9 +213,48 @@ body{
 }
 
 .sign-in-option b{
-  color:rgb(15, 117, 15);
+  color:rgb(15, 193, 15);
 }
 
 .sign-in-option b:hover{
   text-decoration: underline;
+}
+
+.email-error,
+.password-error,
+.confirmPassword-error{
+  color: #ff0000; 
+  font-size: 0.875rem; 
+  margin-top: 0.25rem;
+  margin-bottom: 0px; 
+  position: relative;
+  padding: 0.6rem;
+  background-color: #ffebee;
+  border-radius: 4px;
+  border: 1px solid #ff0000;
+  width:180px;
+}
+
+.email-error::before,
+.password-error::before,
+.confirmPassword-error::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 10px; 
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #ff0000 transparent;
+}
+
+.email-error::after,
+.password-error::after,
+.confirmPassword-error::after {
+  content: '';
+  position: absolute;
+  top: -8px; 
+  left: 10px; 
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #ffebee transparent; /
 }
