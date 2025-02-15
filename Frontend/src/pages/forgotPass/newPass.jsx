@@ -1,5 +1,5 @@
 import './newPass.css'
-function Home(){
+function newPass(){
     return(
         <>
             <h1>newPass</h1>
@@ -7,4 +7,4 @@ function Home(){
     );
 }
 
-export default Home;
+export default newPass;
