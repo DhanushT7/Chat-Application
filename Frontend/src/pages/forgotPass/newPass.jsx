@@ -1,7 +1,9 @@
 import React,{useState} from "react";
 import "./newPass.css";
+import { useNavigate } from "react-router-dom";
 
 const newPass = ()=>{
+    const navigate = useNavigate();
     const [password,setPassword] = useState("");
     const [confirmPassword,setConfirmPassword] = useState("");
     const [isChecked,setIsChecked] = useState(false);
@@ -15,6 +17,9 @@ const newPass = ()=>{
         }
         setError("");
         alert("Password successfully Reset!");
+        setTimeout( ()=>{
+            navigate('/login');
+        },1500);
     };
 
     return (
@@ -51,7 +56,7 @@ const newPass = ()=>{
                             <a href="#">Terms & Conditions</a>
                         </label>
                     </div>
-                    <button type="submit" className="reset-btn" disabled = {!isChecked}>
+                    <button type="submit" className="reset-btn" disabled = {!isChecked}> 
                         Reset Password
                     </button>
                 </form>

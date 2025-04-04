@@ -1,6 +1,8 @@
 import './login.css';
+import { useNavigate } from 'react-router-dom';
 
 function Login(){
+  const navigate = useNavigate();
 
   function generateCaptcha(length = 6) {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -11,6 +13,14 @@ function Login(){
     return captcha;
   }
 
+  function handleForgot(){
+    navigate('/forgotPass');
+  }
+
+  function handleSignUp(){
+    console.log("working...");
+    navigate('/signup');
+  }
 
   return(
     <div className="page">
@@ -43,11 +53,11 @@ function Login(){
 
         </div>
 
-        <div className="forgot-password"><a>Forgot Password?</a></div>
+        <div className="forgot-password"><a onClick={handleForgot}>Forgot Password?</a></div>
 
         <div className="log-in">
           <button  className="login-button" >log in</button>
-          <p>Don&apos;t have an account? <span className="signup" ><a>Sign Up</a></span></p>
+          <p>Don&apos;t have an account? <span className="signup" ><a onClick={handleSignUp}>Sign Up</a></span></p>
         </div>
 
        </div>

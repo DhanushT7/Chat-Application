@@ -75,11 +75,8 @@ function Signup(){
 
   }, [email, password, confirmPassword]);
 
-  function details(){
-    console.log(email);
-    console.log(password);
-    console.log(confirmPassword);
-    console.log(errors);
+  function handleSignUp(){
+    navigate('/login');
   }
 
   return(
@@ -107,7 +104,7 @@ function Signup(){
             {errors.confirmPassword && <p className="confirmPassword-error">{errors.confirmPassword}</p>}
           </div>
 
-          <button disabled={isSignupDisabled} className="signup-btn" onClick={details}>Sign Up</button>
+          <button disabled={isSignupDisabled} className="signup-btn" onClick={handleSignUp}>Sign Up</button>
           <div className="Terms-box">
             <p className="terms">By Signing up, you agree to <b>Terms of Use</b> and <b>Privacy Policy</b></p>
           </div>
