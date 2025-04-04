@@ -1,8 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './sign-up.css'
 
 
 function Signup(){
+
+  const navigate = useNavigate();
+
+  function goToLogin(){
+    navigate("/login");
+  }
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,7 +58,7 @@ function Signup(){
     }
 
     if(confirmPassword && confirmPassword !== password){
-      newErrors.confirmPassword = 'Password do not match!'
+      newErrors.confirmPassword = 'Password does not match!'
       changePasswordColorRed();
     }
 
@@ -106,7 +113,7 @@ function Signup(){
           </div>
 
           <div className="sign-in-option">
-            <p>Already have an account? <b>Sign in</b></p>
+            <p>Already have an account? <b style={{cursor:"pointer"}} onClick={goToLogin}>Sign in</b></p>
           </div>
         </div>
 
