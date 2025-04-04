@@ -1,0 +1,27 @@
+[33m08fc024[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mgokul[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: pull origin main: Fast-forward
+[33m32747a1[m[33m ([m[1;32mmain[m[33m)[m HEAD@{1}: merge main: Fast-forward
+[33m949484e[m HEAD@{2}: checkout: moving from main to gokul
+[33m32747a1[m[33m ([m[1;32mmain[m[33m)[m HEAD@{3}: checkout: moving from gokul to main
+[33m949484e[m HEAD@{4}: checkout: moving from gokul to gokul
+[33m949484e[m HEAD@{5}: checkout: moving from main to gokul
+[33m32747a1[m[33m ([m[1;32mmain[m[33m)[m HEAD@{6}: pull origin main: Fast-forward
+[33m949484e[m HEAD@{7}: reset: moving to HEAD
+[33m949484e[m HEAD@{8}: checkout: moving from gokul to main
+[33m949484e[m HEAD@{9}: checkout: moving from main to gokul
+[33m949484e[m HEAD@{10}: checkout: moving from gokul to main
+[33m949484e[m HEAD@{11}: merge main: Fast-forward
+[33m9b4915f[m HEAD@{12}: checkout: moving from main to gokul
+[33m949484e[m HEAD@{13}: pull origin main: Fast-forward
+[33m9b4915f[m HEAD@{14}: checkout: moving from gokul to main
+[33m9b4915f[m HEAD@{15}: checkout: moving from main to gokul
+[33m9b4915f[m HEAD@{16}: checkout: moving from gokul to main
+[33m9b4915f[m HEAD@{17}: checkout: moving from main to gokul
+[33m9b4915f[m HEAD@{18}: checkout: moving from gokul to main
+[33m9b4915f[m HEAD@{19}: merge main: Fast-forward
+[33m62cd084[m HEAD@{20}: checkout: moving from main to gokul
+[33m9b4915f[m HEAD@{21}: checkout: moving from gokul to main
+[33m62cd084[m HEAD@{22}: checkout: moving from main to gokul
+[33m9b4915f[m HEAD@{23}: pull origin main: Fast-forward
+[33m62cd084[m HEAD@{24}: checkout: moving from gokul to main
+[33m62cd084[m HEAD@{25}: checkout: moving from main to gokul
+[33m62cd084[m HEAD@{26}: clone: from https://github.com/DhanushT7/Chat-Application.git
