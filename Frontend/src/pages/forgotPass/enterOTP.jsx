@@ -1,7 +1,11 @@
 import React,{useState,useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import './enterOTP.css';
 
 function enterOTP(){
+
+  const navigate = useNavigate();
+
   const [otp,setOtp] = useState(["","","",""]);
   const [timerCount,setTimer] = useState(60);
   const [disable,setDisable] = useState(true);
@@ -48,7 +52,17 @@ function enterOTP(){
   }
 
   const handleVerify = () =>{
-    alert(`Entered OTP : ${otp.join("")}`);
+    const isOtpValid = true;
+    if(isOtpValid){
+      alert(`Entered OTP : ${otp.join("")}`);
+      
+      setTimeout(()=>{
+        navigate("/newPass");
+      }, 1500);
+      
+    }else{
+      alert(`Wrong OTP try again`);
+    }
   };
 
   return(
