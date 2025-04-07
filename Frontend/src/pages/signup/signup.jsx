@@ -84,12 +84,16 @@ function Signup(){
     });
 
     const data = await res.json();
-    if(data == "success"){
+    if(data.message == "success"){
+      alert("account created!");
       setTimeout(()=>{
-        return navigate('/login');
+        navigate('/login');
       }, 1500);
-    }
-    alert("error in account creation!");
+
+    }else{
+      alert(data.message);
+    }  
+    return;
   }
 
   return(

@@ -25,8 +25,12 @@ app.post("/api/signup", async (req, res)=>{
     const result = await user.create(req.body);
     res.status(200).json({message:"success"});
   }catch(error){
-    console.log(error.message);
-    res.status(500).json({message:"failed"});
+
+    if(error.code == 11000 && error.keyValue.email ){
+      return res.status(500).json({message:"email already exists!"});
+    }
+
+    res.status(500).json({message:"Some issue in creating account!"});
   }
   return;
 });
