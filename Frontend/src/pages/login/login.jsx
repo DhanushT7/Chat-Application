@@ -29,7 +29,7 @@ function Login(){
 
         return;
       }else{
-        alert("wrong login!");
+        alert(data.message);
         return;
       }
 

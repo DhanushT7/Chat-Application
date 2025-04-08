@@ -42,16 +42,25 @@ app.post("/api/signup", async (req, res)=>{
 
 app.post('/api/login', async (req, res) => {
 
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+  email = email.trim()
+  password = password.trim()
 
   try {
-      const result = await user.findOne({ email: email, password: password });
-      if (result) {
+      const result = await user.findOne({ email: email});
+      if(!result){
+        return res.status(401).json({ message: 'email not found!' });
+      }
+
+      const checkPassword = await decrypt(password, result.password);
+
+      if (checkPassword) {
         res.status(200).json({message:"success"});
       } else {
           res.status(401).json({ message: 'Invalid email or password' });
       }
   } catch (error) {
+      console.log(error);
       res.status(500).json({ message: 'Server error'});
   }
 });
