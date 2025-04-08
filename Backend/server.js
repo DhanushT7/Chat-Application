@@ -67,6 +67,22 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+app.post('/api/check-email', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const result = await user.findOne({ email });
+    if (result) {
+      res.status(200).json({ exists: true });
+    } else {
+      res.status(200).json({ exists: false });
+    }
+  } catch (err) {
+    console.error("Error checking email:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.post('/api/send_recovery_email' , async (req, res) =>{
       const {recepient_email, OTP} = req.body;
 
@@ -86,6 +102,32 @@ app.post('/api/send_recovery_email' , async (req, res) =>{
       }catch(err){
         res.status(500).json({message: err.message || "E-mail failed to be sent"});
       }
+});
+
+app.post("/api/update", async (req, res)=>{
+  let {email, password} = req.body;
+
+  if(!email || !password){
+    res.status(404).json({ message: "Missing email or password" });
+  }
+  try{
+    const hashedPassword = await encrypt(password);
+
+    const result = await user.findOneAndUpdate(
+      {email : email},
+      {$set: {password : hashedPassword}},
+      {new : true}
+    );
+    if (result) {
+      res.status(200).json({ message: "Password updated successfully." });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  }catch(error){
+    console.error("Failed to update password:", error);
+    res.status(500).json({message:"Failed to update password:"});
+  }
+  return;
 });
 
 

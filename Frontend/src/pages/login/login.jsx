@@ -68,9 +68,34 @@ function Login(){
   }
 
   function handleForgot() {
-    navigate('/forgotPass', { state: { email } });
+    const email = prompt("Please enter your email address:");
+    if (email) {
+      checkEmailExists(email);
+    }
   }
   
+  async function checkEmailExists(email) {
+    try {
+      const res = await fetch('http://localhost:5001/api/check-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+  
+      const data = await res.json();
+      if (data.exists) {
+        // Email exists, proceed to forgot password OTP page
+        navigate('/forgotPass', { state: { email } });
+      } else {
+        // Email does not exist, prompt user to sign up
+        if (confirm("Email not found. Would you like to sign up?")) {
+          navigate('/signup');
+        }
+      }
+    } catch (err) {
+      console.error("Failed to check email:", err);
+    }
+  }
 
   function handleSignUp(){
     console.log("working...");

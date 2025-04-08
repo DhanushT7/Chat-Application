@@ -105,10 +105,10 @@ function enterOTP(){
     const enteredOtp = otp.join("");
 
     if(enteredOtp == generatedOtp){
-      alert(`\tOTP Verified \nEntered OTP : ${otp.join("")}`);
+      alert(`\t\t\tOTP Verified \nEntered OTP : ${otp.join("")}`);
       
       setTimeout(()=>{
-        navigate("/newPass");
+        navigate('/newPass', { state: { email } });
       }, 1000);
       
     }else{
