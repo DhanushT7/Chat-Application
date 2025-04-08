@@ -74,8 +74,25 @@ function Signup(){
 
   }, [email, password, confirmPassword]);
 
-  function handleSignUp(){
-    navigate('/login');
+  const handleSignUp =  async()=>{
+
+    const res = await fetch("http://localhost:5001/api/signup", {
+      method : "POST",
+      headers : {'Content-Type':'application/json'},
+      body : JSON.stringify({email:email, password:password}),
+    });
+
+    const data = await res.json();
+    if(data.message == "success"){
+      alert("account created!");
+      setTimeout(()=>{
+        navigate('/login');
+      }, 1500);
+
+    }else{
+      alert(data.message);
+    }  
+    return;
   }
 
   return(
