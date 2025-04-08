@@ -17,7 +17,7 @@ function Signup(){
   const [errors, setErrors] = useState({});
   const [isSignupDisabled, setSignupDisabled] = useState(true);
 
-  function changePasswordColorGreen(color){
+  function changePasswordColorGreen(){
     document.querySelector('.password')
     .setAttribute("style", "color:green;outline:2px solid rgb(16, 201, 16)");
 
@@ -25,7 +25,7 @@ function Signup(){
     .setAttribute("style", "color:green;outline:2px solid rgb(16, 201, 16)");
   }
 
-  function changePasswordColorRed(color){
+  function changePasswordColorRed(){
     document.querySelector('.password')
     .setAttribute("style", "color: rgb(245, 30, 30);outline:2px solid rgb(245, 30, 30)");
 
@@ -47,7 +47,6 @@ function Signup(){
 
   useEffect(()=>{
     let newErrors = {};
-    let noOfCorrectEntries = 0;
 
     if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
       newErrors.email = 'Invalid email or username!'
