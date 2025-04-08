@@ -3,10 +3,12 @@ import cors from "cors"
 import dotenv from "dotenv"
 import encrypt from "./passwordManager/encryption.js"
 import decrypt from "./passwordManager/decryption.js"
+import sendEmail from "./mailManager/sendEmail.js";
 import connectDb from "./config/db.js"
 import user from "./Models/userModel.js"
 
 const app = express();
+const otpCache = new Map();
 app.use(express.json());
 app.use(cors({
   origin : "http://localhost:5173",
@@ -63,6 +65,27 @@ app.post('/api/login', async (req, res) => {
       console.log(error);
       res.status(500).json({ message: 'Server error'});
   }
+});
+
+app.post('/api/send_recovery_email' , async (req, res) =>{
+      const {recepient_email, OTP} = req.body;
+
+      if(!recepient_email || !OTP){
+        return res.status(400).json({ message: "Missing E-mail or OTP..."});
+      }
+
+      const existingOtp = otpCache.get(recepient_email);
+      if (existingOtp && Date.now() - existingOtp.timestamp < 60000) { // Check if OTP was sent in the last 1 minutes
+        return res.status(200).json({ message: "OTP already sent." });
+      }
+
+      try{
+        otpCache.set(recepient_email, { otp: OTP, timestamp: Date.now() });
+        const result = await sendEmail({recepient_email,OTP});
+        res.status(200).json({message: result.message});
+      }catch(err){
+        res.status(500).json({message: err.message || "E-mail failed to be sent"});
+      }
 });
 
 
