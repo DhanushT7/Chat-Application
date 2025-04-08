@@ -35,6 +35,23 @@ app.post("/api/signup", async (req, res)=>{
   return;
 });
 
+app.post('/api/login', async (req, res) => {
+
+  const { email, password } = req.body;
+
+  try {
+      const result = await user.findOne({ email: email, password: password });
+      if (result) {
+        res.status(200).json({message:"success"});
+      } else {
+          res.status(401).json({ message: 'Invalid email or password' });
+      }
+  } catch (error) {
+      res.status(500).json({ message: 'Server error'});
+  }
+});
+
+
 app.listen(5001, ()=>{
   console.log("server started: http://localhost:5001");
 });

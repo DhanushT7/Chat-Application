@@ -1,6 +1,6 @@
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function Login(){
   const navigate = useNavigate();
@@ -40,6 +40,10 @@ function Login(){
 
     }
   }
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
 
   function generateCaptcha(length = 6) {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -95,7 +99,7 @@ function Login(){
             <label className="captcha-label" htmlFor="captcha-input">Captcha</label>
 
              <div className="captcha">
-                <div className="captcha-display">{generateCaptcha()}</div>
+                <div className="captcha-display">{gcaptcha}</div>
                 <input className="captcha-input" id="captcha-input" type="text" placeholder="captcha" onChange={handleCaptchaChange}></input>
               </div>
                 
