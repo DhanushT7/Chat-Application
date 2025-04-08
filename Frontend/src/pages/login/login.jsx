@@ -1,16 +1,66 @@
 import './login.css';
 import { useNavigate } from 'react-router-dom';
+import {useState} from 'react';
 
 function Login(){
   const navigate = useNavigate();
 
+  const [captcha, setCaptcha]=useState("");
+  const [gcaptcha, setgCaptcha]=useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleLogIn(){
+
+    if(captcha===gcaptcha){
+
+      const res = await fetch("http://localhost:5001/api/login", {
+        method : "POST",
+        headers : {'Content-Type':'application/json'},
+        body : JSON.stringify({email:email, password:password}),
+      });
+
+      const data = await res.json();
+      if(data.message == "success"){
+        alert("account logged in!");
+        setTimeout(()=>{
+          navigate('/home');
+        }, 1500);
+
+        return;
+      }else{
+        alert("wrong login!");
+        return;
+      }
+
+    }else{
+
+      alert("Wrong Captcha");
+      generateCaptcha();
+
+    }
+  }
+
   function generateCaptcha(length = 6) {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let captcha = "";
+    let capt=""
     for (let i = 0; i < length; i++) {
-        captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        capt += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    return captcha;
+    setgCaptcha(capt)
+    return capt;
+  }
+
+  function handleEmailChange(event){
+    setEmail(event.target.value);
+  }
+
+  function handlePasswordChange(event){
+    setPassword(event.target.value);
+  }
+
+  function handleCaptchaChange(event){
+    setCaptcha(event.target.value);
   }
 
   function handleForgot(){
@@ -33,12 +83,12 @@ function Login(){
 
           <div className="username-input-box">
             <label  className="username-label" htmlFor="username">Username</label>
-            <input className="username" id="username" type="text" placeholder="username"></input>
+            <input className="username" id="username" type="text" placeholder="username" onChange={handleEmailChange}></input>
           </div>
 
           <div className="password-input-box">
             <label className="password-label" htmlFor="password">Password</label>
-            <input className="pin" id="password" type="password" placeholder="password"></input>
+            <input className="pin" id="password" type="password" placeholder="password" onChange={handlePasswordChange}></input>
           </div>
 
           <div className="captcha-input-box">
@@ -46,7 +96,7 @@ function Login(){
 
              <div className="captcha">
                 <div className="captcha-display">{generateCaptcha()}</div>
-                <input className="captcha-input" id="captcha-input" type="text" placeholder="captcha" ></input>
+                <input className="captcha-input" id="captcha-input" type="text" placeholder="captcha" onChange={handleCaptchaChange}></input>
               </div>
                 
           </div>
@@ -56,7 +106,7 @@ function Login(){
         <div className="forgot-password"><a onClick={handleForgot}>Forgot Password?</a></div>
 
         <div className="log-in">
-          <button  className="login-button" >log in</button>
+          <button onClick={handleLogIn}  className="login-button" >log in</button>
           <p>Don&apos;t have an account? <span className="signup" ><a onClick={handleSignUp}>Sign Up</a></span></p>
         </div>
 
