@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors"
 import dotenv from "dotenv"
+import encrypt from "./passwordManager/encryption.js"
+import decrypt from "./passwordManager/decryption.js"
 import connectDb from "./config/db.js"
 import user from "./Models/userModel.js"
 
@@ -19,11 +21,14 @@ app.get("/", (req, res)=>{
 });
 
 app.post("/api/signup", async (req, res)=>{
-  const {email, password} = req.body;
+  let {email, password} = req.body;
 
   try{
-    const result = await user.create(req.body);
+
+    const hashedPassword = await encrypt(password);
+    const result = await user.create({email : email, password : hashedPassword});
     res.status(200).json({message:"success"});
+
   }catch(error){
 
     if(error.code == 11000 && error.keyValue.email ){
