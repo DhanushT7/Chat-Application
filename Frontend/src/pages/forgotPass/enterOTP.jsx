@@ -9,13 +9,21 @@ function enterOTP(){
 
   const location = useLocation();
   const [email, setEmail] = useState("");
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [isRequestInProgress, setIsRequestInProgress] = useState(false);
 
   useEffect(() => {
-    if (location.state && location.state.email) {
+    if (location.state?.email) {
       setEmail(location.state.email);
       console.log("Received email from login page:", location.state.email);
+  
+      // Call generateOtp only once
+      if (!generatedOtp) {
+        generateOtp(location.state.email);
+      }
     }
-  }, [location]);
+  }, []); // Empty dependency array ensures this runs only once
+  
 
   const [otp,setOtp] = useState(["","","",""]);
   const [timerCount,setTimer] = useState(60);
@@ -35,6 +43,7 @@ function enterOTP(){
   const handleResendOTP=()=>{
     setTimer(60);
     setDisable(true);
+    generateOtp(email);
     console.log("OTP Resent!");
   }
 
@@ -62,17 +71,48 @@ function enterOTP(){
     }
   }
 
+  let debounceTimeout;
+
+  const generateOtp = async (email) => {
+      if (debounceTimeout || isRequestInProgress) return;
+
+      setIsRequestInProgress(true);
+      debounceTimeout = setTimeout(() => {
+        debounceTimeout = null;
+      },1000);
+
+      const otp = Math.floor(1000 + Math.random()*9000).toString();
+      setGeneratedOtp(otp);
+      console.log("Generating OTP for email:", email);
+
+      try {
+        const res = await fetch('http://localhost:5001/api/send_recovery_email',{
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json' },
+          body: JSON.stringify({ recepient_email: email, OTP: otp }),
+        });
+
+        const data = await res.text();
+        console.log("Server Response : ", data);
+      }catch(err){
+        console.log("Failed to send OTP.", err);
+      }finally{
+        setIsRequestInProgress(false);
+      }
+  };
+
   const handleVerify = () =>{
-    const isOtpValid = true;
-    if(isOtpValid){
-      alert(`Entered OTP : ${otp.join("")}`);
+    const enteredOtp = otp.join("");
+
+    if(enteredOtp == generatedOtp){
+      alert(`\tOTP Verified \nEntered OTP : ${otp.join("")}`);
       
       setTimeout(()=>{
         navigate("/newPass");
-      }, 1500);
+      }, 1000);
       
     }else{
-      alert(`Wrong OTP try again`);
+      alert(`Wrong OTP. Try again`);
     }
   };
 
