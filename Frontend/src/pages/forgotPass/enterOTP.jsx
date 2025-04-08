@@ -1,10 +1,21 @@
 import React,{useState,useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import './enterOTP.css';
 
 function enterOTP(){
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (location.state && location.state.email) {
+      setEmail(location.state.email);
+      console.log("Received email from login page:", location.state.email);
+    }
+  }, [location]);
 
   const [otp,setOtp] = useState(["","","",""]);
   const [timerCount,setTimer] = useState(60);

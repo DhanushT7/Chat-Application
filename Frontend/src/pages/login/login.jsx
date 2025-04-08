@@ -67,9 +67,10 @@ function Login(){
     setCaptcha(event.target.value);
   }
 
-  function handleForgot(){
-    navigate('/forgotPass');
+  function handleForgot() {
+    navigate('/forgotPass', { state: { email } });
   }
+  
 
   function handleSignUp(){
     console.log("working...");
