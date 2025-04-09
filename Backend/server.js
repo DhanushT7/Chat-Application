@@ -3,7 +3,8 @@ import cors from "cors"
 import dotenv from "dotenv"
 import encrypt from "./passwordManager/encryption.js"
 import decrypt from "./passwordManager/decryption.js"
-import sendEmail from "./mailManager/sendEmail.js";
+import sendEmail from "./mailManager/sendEmail.js"
+import SignupEmail from "./mailManager/signupEmail.js"
 import connectDb from "./config/db.js"
 import user from "./Models/userModel.js"
 
@@ -24,17 +25,14 @@ app.get("/", (req, res)=>{
 
 app.post("/api/signup/checkEmailExists", async (req, res)=>{
   let {email, password} = req.body;
-  console.log(email);
-
   try{
     //check email alreadt exists
 
     const result = await user.findOne({email:email});
-    console.log(result);
-
     if(result){
       return res.status(401).json({message:"email already exists"});
     }else{
+
       return res.status(200).json({message:"email not exists"});
     }
 
@@ -43,6 +41,26 @@ app.post("/api/signup/checkEmailExists", async (req, res)=>{
   }
 });
 
+
+app.post("/api/createAccount", async (req, res)=>{
+  const {email, password} = req.body;
+  if(email && password){
+    try{
+
+      const hashedPassword = await encrypt(password);
+      const result = await user.create({email : email, password : hashedPassword});
+      return res.status(200).json({message:"success"});
+
+    }catch(error){
+      console.log(error.message);
+      return res.send(500).json({message:"cant able to create Account"});
+    }
+  }else{
+    return response.status(401).json({message:"Incorrect email or password"});
+  }
+})
+
+/*
 app.post("/api/signup", async (req, res)=>{
   let {email, password} = req.body;
 
@@ -61,7 +79,7 @@ app.post("/api/signup", async (req, res)=>{
     res.status(500).json({message:"Some issue in creating account!"});
   }
   return;
-});
+});  */
 
 app.post('/api/login', async (req, res) => {
 
@@ -104,8 +122,31 @@ app.post('/api/check-email', async (req, res) => {
   }
 });
 
+app.post('/api/verify_email' , async (req, res) =>{
+  const {recepient_email, OTP} = req.body;
+  console.log(recepient_email, OTP);
+
+  if(!recepient_email || !OTP){
+    return res.status(400).json({ message: "Missing E-mail or OTP..."});
+  }
+
+  const existingOtp = otpCache.get(recepient_email);
+  if (existingOtp && Date.now() - existingOtp.timestamp < 60000) { // Check if OTP was sent in the last 1 minutes
+    return res.status(200).json({ message: "OTP already sent." });
+  }
+
+  try{
+    otpCache.set(recepient_email, { otp: OTP, timestamp: Date.now() });
+    const result = await SignupEmail({recepient_email,OTP});
+    res.status(200).json({message: result.message});
+  }catch(err){
+    res.status(500).json({message: err.message || "E-mail failed to be sent"});
+  }
+});
+
 app.post('/api/send_recovery_email' , async (req, res) =>{
       const {recepient_email, OTP} = req.body;
+      console.log(recepient_email, OTP);
 
       if(!recepient_email || !OTP){
         return res.status(400).json({ message: "Missing E-mail or OTP..."});
