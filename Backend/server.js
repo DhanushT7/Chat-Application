@@ -22,6 +22,27 @@ app.get("/", (req, res)=>{
   res.send("API is running");
 });
 
+app.post("/api/signup/checkEmailExists", async (req, res)=>{
+  let {email, password} = req.body;
+  console.log(email);
+
+  try{
+    //check email alreadt exists
+
+    const result = await user.findOne({email:email});
+    console.log(result);
+
+    if(result){
+      return res.status(401).json({message:"email already exists"});
+    }else{
+      return res.status(200).json({message:"email not exists"});
+    }
+
+  }catch(error){
+    return res.status(500).json({message:"server issue!"});
+  }
+});
+
 app.post("/api/signup", async (req, res)=>{
   let {email, password} = req.body;
 

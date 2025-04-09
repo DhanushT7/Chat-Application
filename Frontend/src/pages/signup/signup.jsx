@@ -74,6 +74,28 @@ function Signup(){
 
   }, [email, password, confirmPassword]);
 
+
+  const handleSignUp =  async()=>{
+
+    console.log("checking email exist or not");
+    const res = await fetch("http://localhost:5001/api/signup/checkEmailExists", {
+      method : "POST",
+      headers : {'Content-Type':'application/json'},
+      body : JSON.stringify({email:email, password:password}),
+    });
+
+    const data = await res.json();
+    if(data.message === "email not exists"){
+      alert("verify you email");
+      navigate("/verifyEmail");
+    }else{
+      alert(data.message);
+    }
+
+    return;
+  }
+
+/*
   const handleSignUp =  async()=>{
 
     const res = await fetch("http://localhost:5001/api/signup", {
@@ -93,7 +115,7 @@ function Signup(){
       alert(data.message);
     }  
     return;
-  }
+  }   */
 
   return(
     <div className="page-body">
