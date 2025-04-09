@@ -38,7 +38,10 @@ function newPass() {
       const data = await res.json();
       if (data.message === "Password updated successfully.") {
         alert("Password successfully updated.");
-        navigate("/login"); // Use navigate directly here
+        navigate("/login", {
+          replace: true,
+          state: null,
+        }); 
       } else {
         alert(data.message);
       }

@@ -17,14 +17,17 @@ function VerifyEmail() {
       setEmail(location.state.email);
       setPassword(location.state.password);
 
-      const optSentAlready = sessionStorage.getItem("otpSent");
       // Call generateOtp only once
       if (!generatedOtp) {
+        console.log("Generating OTP...");
         generateOtp(location.state.email);
-        sessionStorage.setItem("otpSent","true");
+      }else {
+        console.log("Otp Already sent or user is verified.");
       }
+    }else{
+      console.log("No email or password found in location");
     }
-  }, [location]); // Empty dependency array ensures this runs only once
+  }, []); // Empty dependency array ensures this runs only once
 
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timerCount, setTimer] = useState(60);
@@ -115,13 +118,11 @@ function VerifyEmail() {
       const data = await result.json();
 
       if (data.message === "success") {
-        //  alert(`\t\t\tOTP Verified \nEntered OTP : ${otp.join("")}`);
+        //  alert(`OTP Verified \nEntered OTP : ${otp.join("")}`);
 
         alert(`OTP Verified\nAccount Created`);
         setTimeout(() => {
-          location.state.email = "";
-          location.state.password = "";
-          navigate("/login");
+          navigate("/login",{state : null});
         }, 1000);
       } else {
         alert("Internal server Error");

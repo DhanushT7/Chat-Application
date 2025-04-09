@@ -16,11 +16,16 @@ function enterOTP(){
     if (location.state?.email) {
       setEmail(location.state.email);
       console.log("Received email from login page:", location.state.email);
-  
+      
       // Call generateOtp only once
       if (!generatedOtp) {
+        console.log("Generating OTP...");
         generateOtp(location.state.email);
+      }else {
+        console.log("Otp Already sent, Or user is verified.");
       }
+    }else{
+      console.log("No email found in location");
     }
   }, []); // Empty dependency array ensures this runs only once
   
@@ -105,10 +110,13 @@ function enterOTP(){
     const enteredOtp = otp.join("");
 
     if(enteredOtp == generatedOtp){
-      alert(`\t\t\tOTP Verified \nEntered OTP : ${otp.join("")}`);
+      alert(`OTP Verified \nEntered OTP : ${otp.join("")}`);
       
       setTimeout(()=>{
-        navigate('/newPass', { state: { email } });
+        navigate('/newPass', { 
+          replace: true,
+          state: { email },
+        });
       }, 1000);
       
     }else{

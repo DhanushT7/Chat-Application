@@ -8,11 +8,25 @@ import SignupEmail from "./mailManager/signupEmail.js"
 import connectDb from "./config/db.js"
 import user from "./Models/userModel.js"
 
+const allowedOrigins = [
+  "http://localhost:5173", 
+  "http://10.7.103.226:5173",
+  "http://10.5.12.254:5173",
+  "http://192.168.1.200:5173"
+];
+
 const app = express();
 const otpCache = new Map();
 app.use(express.json());
 app.use(cors({
-  origin : "http://localhost:5173",
+  origin : (origin, callback) => {
+    if(!origin || allowedOrigins.includes(origin)){
+      callback(null, true);
+    }
+    else{
+      callback(new Error("Not Allowed by CORS."));
+    }
+  },
   credentials: true, 
 }));
 
