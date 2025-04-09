@@ -12,3 +12,5 @@ const connectDb =  async()=>{
 }
 
 export default connectDb;
+
+//mongosh --host 10.5.12.254 --port 27020 -u "gibberAdmin" -p "@gibber&gabber|" --authenticationDatabase "admin"
