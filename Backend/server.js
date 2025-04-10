@@ -41,6 +41,7 @@ app.get("/", (req, res)=>{
 
 app.use("/api/auth",authRoutes);
 
+/*
 app.post("/api/signup/checkEmailExists", async (req, res)=>{
   let {email, password} = req.body;
   try{
@@ -78,7 +79,7 @@ app.post("/api/createAccount", async (req, res)=>{
   }
 })
 
-/*
+
 app.post("/api/signup", async (req, res)=>{
   let {email, password} = req.body;
 
@@ -97,7 +98,7 @@ app.post("/api/signup", async (req, res)=>{
     res.status(500).json({message:"Some issue in creating account!"});
   }
   return;
-});  */
+});  
 
 app.post('/api/login', async (req, res) => {
   let { email, password } = req.body;
@@ -207,7 +208,7 @@ app.post("/api/update", async (req, res)=>{
     res.status(500).json({message:"Failed to update password:"});
   }
   return;
-});
+}); */
 
 
 app.listen(5001, ()=>{

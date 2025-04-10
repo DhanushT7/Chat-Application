@@ -83,6 +83,7 @@ export const checkEmail = asyncHandler(async (req, res)=>{
 })
 
 export const verifyEmail = asyncHandler(async (req, res)=>{
+  const otpCache = new Map();
   const {recepient_email, OTP} = req.body;
     console.log(recepient_email, OTP);
   

@@ -90,14 +90,14 @@ function VerifyEmail() {
     console.log("Generating OTP for email:", email);
 
     try {
-      const res = await fetch("http://localhost:5001/api/verify_email", {
+      console.log("verify email request");      
+      const res = await fetch("http://localhost:5001/api/auth/verify_email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ recepient_email: email, OTP: otp }),
       });
 
       const data = await res.text();
-      console.log("Server Response : ", data);
     } catch (err) {
       console.log("Failed to send OTP.", err);
     } finally {
@@ -109,7 +109,7 @@ function VerifyEmail() {
     const enteredOtp = otp.join("");
 
     if (enteredOtp == generatedOtp) {
-      const result = await fetch("http://localhost:5001/api/createAccount", {
+      const result = await fetch("http://localhost:5001/api/auth/createAccount", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: password }),
