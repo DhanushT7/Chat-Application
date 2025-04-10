@@ -120,9 +120,11 @@ function VerifyEmail() {
       if (data.message === "success") {
         //  alert(`OTP Verified \nEntered OTP : ${otp.join("")}`);
 
-        alert(`OTP Verified\nAccount Created`);
+        alert(`\t\t\tOTP Verified\nAccount Created`);
         setTimeout(() => {
-          navigate("/login",{state : null});
+          navigate("/login",{
+            replace: true,
+            state : null});
         }, 1000);
       } else {
         alert("Internal server Error");
