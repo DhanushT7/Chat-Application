@@ -106,7 +106,8 @@ export const verifyEmail = asyncHandler(async (req, res)=>{
 })
 
 export const sendRecoveryEmail = asyncHandler(async (req, res)=>{
-  const {recepient_email, OTP} = req.body;
+        const {recepient_email, OTP} = req.body;
+        const otpCache = new Map();
         console.log(recepient_email, OTP);
   
         if(!recepient_email || !OTP){

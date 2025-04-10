@@ -120,7 +120,7 @@ function VerifyEmail() {
       if (data.message === "success") {
         //  alert(`OTP Verified \nEntered OTP : ${otp.join("")}`);
 
-        alert(`\t\t\tOTP Verified\nAccount Created`);
+        alert(`OTP Verified\nAccount Created`);
         setTimeout(() => {
           navigate("/login",{
             replace: true,

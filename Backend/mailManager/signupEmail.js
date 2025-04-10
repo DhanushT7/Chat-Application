@@ -15,7 +15,7 @@ export default function SignupEmail({ recepient_email, OTP }) {
         const mail_configs = {
             from: process.env.ADMIN_EMAIL,
             to: recepient_email,
-            subject: 'Gibberish Password Recovery...',
+            subject: 'Gibberish Verification to Register New User...',
             html: `
                 <!DOCTYPE html>
                 <html lang="en" >

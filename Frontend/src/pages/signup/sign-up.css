@@ -258,3 +258,37 @@ body{
   border-style: solid;
   border-color: transparent transparent #ffebee transparent; /
 }
+
+.checklist {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.checklist li {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.checklist li::before {
+  content: '✓';
+  display: inline-block;
+  margin-right: 8px;
+  color: green;
+  font-weight: bold;
+}
+
+.checklist li.invalid::before {
+  content: '✖';
+  color: red;
+}
+.checklist li.invalid {
+  color: red;
+}
+
+.checklist li.valid {
+  color: green;
+}

@@ -13,8 +13,7 @@ const allowedOrigins = [
   "http://localhost:5173", 
   "http://10.7.103.226:5173",
   "http://10.5.12.254:5173",
-  "http://192.168.1.200:5173",
-  "http://10.7.105.88:5173"
+  "http://192.168.1.200:5173"
 ];
 
 const app = express();
@@ -211,6 +210,6 @@ app.post("/api/update", async (req, res)=>{
 }); */
 
 
-app.listen(5001, ()=>{
+app.listen(5001,"0.0.0.0", ()=>{
   console.log("server started: http://localhost:5001");
 });

@@ -110,7 +110,7 @@ function enterOTP(){
     const enteredOtp = otp.join("");
 
     if(enteredOtp == generatedOtp){
-      alert(`OTP Verified \nEntered OTP : ${otp.join("")}`);
+      alert(`OTP Verified\nEntered OTP : ${otp.join("")}`);
       
       setTimeout(()=>{
         navigate('/newPass', { 
