@@ -84,7 +84,7 @@ function Signup() {
   const handleSignUp = async () => {
     console.log("checking email exist or not");
     const res = await fetch(
-      "http://localhost:5001/api/signup/checkEmailExists",
+      "http://localhost:5001/api/auth/signup/checkEmailExists",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
