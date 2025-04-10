@@ -29,7 +29,7 @@ function newPass() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5001/api/update", {
+      const res = await fetch("http://localhost:5001/api/auth/update", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, password: password }),

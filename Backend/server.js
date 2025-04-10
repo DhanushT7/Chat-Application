@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors"
 import dotenv from "dotenv"
+import authRoutes from "./routes/authRoutes.js"
 import encrypt from "./passwordManager/encryption.js"
 import decrypt from "./passwordManager/decryption.js"
 import sendEmail from "./mailManager/sendEmail.js"
@@ -12,7 +13,8 @@ const allowedOrigins = [
   "http://localhost:5173", 
   "http://10.7.103.226:5173",
   "http://10.5.12.254:5173",
-  "http://192.168.1.200:5173"
+  "http://192.168.1.200:5173",
+  "http://10.7.105.88:5173"
 ];
 
 const app = express();
@@ -37,6 +39,9 @@ app.get("/", (req, res)=>{
   res.send("API is running");
 });
 
+app.use("/api/auth",authRoutes);
+
+/*
 app.post("/api/signup/checkEmailExists", async (req, res)=>{
   let {email, password} = req.body;
   try{
@@ -74,7 +79,7 @@ app.post("/api/createAccount", async (req, res)=>{
   }
 })
 
-/*
+
 app.post("/api/signup", async (req, res)=>{
   let {email, password} = req.body;
 
@@ -93,10 +98,9 @@ app.post("/api/signup", async (req, res)=>{
     res.status(500).json({message:"Some issue in creating account!"});
   }
   return;
-});  */
+});  
 
 app.post('/api/login', async (req, res) => {
-
   let { email, password } = req.body;
   email = email.trim()
   password = password.trim()
@@ -204,7 +208,7 @@ app.post("/api/update", async (req, res)=>{
     res.status(500).json({message:"Failed to update password:"});
   }
   return;
-});
+}); */
 
 
 app.listen(5001, ()=>{
