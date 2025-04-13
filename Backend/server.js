@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors"
 import dotenv from "dotenv"
 import authRoutes from "./routes/authRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 import encrypt from "./passwordManager/encryption.js"
 import decrypt from "./passwordManager/decryption.js"
 import sendEmail from "./mailManager/sendEmail.js"
@@ -39,6 +40,7 @@ app.get("/", (req, res)=>{
 });
 
 app.use("/api/auth",authRoutes);
+app.use("/api/user",userRoutes);
 
 /*
 app.post("/api/signup/checkEmailExists", async (req, res)=>{
