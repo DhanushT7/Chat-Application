@@ -122,7 +122,9 @@ function VerifyEmail() {
 
         alert(`OTP Verified\nAccount Created`);
         setTimeout(() => {
-          navigate("/login",{state : null});
+          navigate("/login",{
+            replace: true,
+            state : null});
         }, 1000);
       } else {
         alert("Internal server Error");

@@ -34,6 +34,7 @@
   font-size:1.4rem;
 
   background: linear-gradient(to right, #0557c2 50%, rgba(225, 66, 204, 0.8));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 

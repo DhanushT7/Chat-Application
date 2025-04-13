@@ -6,15 +6,14 @@ import encrypt from "./passwordManager/encryption.js"
 import decrypt from "./passwordManager/decryption.js"
 import sendEmail from "./mailManager/sendEmail.js"
 import SignupEmail from "./mailManager/signupEmail.js"
-import connectDb from "./config/db.js"
 import user from "./Models/userModel.js"
+import db from './config/db.js';
 
 const allowedOrigins = [
   "http://localhost:5173", 
   "http://10.7.103.226:5173",
   "http://10.5.12.254:5173",
-  "http://192.168.1.200:5173",
-  "http://10.7.105.88:5173"
+  "http://192.168.1.200:5173"
 ];
 
 const app = express();
@@ -33,7 +32,7 @@ app.use(cors({
 }));
 
 dotenv.config();
-connectDb()
+db.connectDb();
 
 app.get("/", (req, res)=>{
   res.send("API is running");
@@ -210,7 +209,12 @@ app.post("/api/update", async (req, res)=>{
   return;
 }); */
 
+process.on('SIGINT', async () => {
+  console.log("\n📴 Gracefully shutting down...");
+  await db.closeDb();
+  process.exit(0);
+});
 
-app.listen(5001, ()=>{
+app.listen(5001,"0.0.0.0", ()=>{
   console.log("server started: http://localhost:5001");
 });
